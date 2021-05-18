@@ -1,19 +1,22 @@
-package com.avrioc.netty;
+package com.avrioc.netty.handlers;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 
-public class HttpHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+public class HttpHandler extends ChannelInboundHandlerAdapter {
     WebSocketServerHandshaker handshaker;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest msg) {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println(msg);
 
         if (msg instanceof HttpRequest) {
 

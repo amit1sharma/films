@@ -1,4 +1,4 @@
-package com.avrioc.netty;
+package com.avrioc.netty.handlers;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -17,10 +17,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
         if (msg instanceof WebSocketFrame) {
             System.out.println("This is a WebSocket frame");
             System.out.println("Client Channel : " + ctx.channel());
-            if (msg instanceof BinaryWebSocketFrame) {
-                System.out.println("BinaryWebSocketFrame Received : ");
-                System.out.println(((BinaryWebSocketFrame) msg).content());
-            } else if (msg instanceof TextWebSocketFrame) {
+             if (msg instanceof TextWebSocketFrame) {
                 System.out.println("TextWebSocketFrame Received : ");
                 ctx.channel().writeAndFlush(
                         new TextWebSocketFrame("Message recieved : " + ((TextWebSocketFrame) msg).text()));
